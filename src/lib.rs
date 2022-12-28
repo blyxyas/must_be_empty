@@ -1,3 +1,26 @@
+//! # Must be empty
+//! 
+//! This attribute checks that a given function is empty. It is just that.
+//! This can be useful for debugging, when you're just using using `cargo test` and want to assure that nobody
+//! 
+//! ## Example
+//! 
+//! ```rust
+//! use must_be_empty::must_be_empty;
+//! 
+//! #[must_be_empty]
+//! fn main() {}
+//! ```
+//! 
+//! ## Installation
+//! 
+//! Put this in your `Cargo.toml` file:
+//! 
+//! ```toml
+//! [dependencies]
+//! must_be_empty = "0.1.0"
+//! ```
+
 use proc_macro::TokenStream;
 use proc_macro_error::{emit_error, emit_warning, proc_macro_error};
 use quote::quote;
@@ -6,7 +29,7 @@ use syn::{parse_macro_input, ItemFn};
 
 #[proc_macro_error]
 #[proc_macro_attribute]
-/// Makes sure that a specific function is empty. It only works in *release* mode. (Intended to do a `cargo check --release` before commiting)
+/// Makes sure that a specific function is empty.
 ///
 /// # Example
 ///
@@ -18,7 +41,13 @@ pub fn must_be_empty(_metadata: TokenStream, input: TokenStream) -> TokenStream 
         } else {
             input
         }
-    } else {
+    } else if cfg!(feature = "only_on_debug") {
+		if cfg!(debug_assertions) {
+			visit(input)
+		} else {
+			input
+		}
+	} else {
         visit(input)
     }
 }

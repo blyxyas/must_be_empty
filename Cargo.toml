@@ -3,7 +3,11 @@ name = "must_be_empty"
 version = "0.1.0"
 edition = "2021"
 description = "Makes sure that an specific function is empty. With no statements"
-
+license = "MIT"
+repository = "https://github.com/blyxyas/must_be_empty"
+readme = "README.md"
+keywords = ["attribute", "proc_macro", "functions", "proc", "macro"]
+categories = ["development-tools", "development-tools::debugging", "no-std"]
 exclude = ["tests/"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -19,5 +23,6 @@ proc-macro = true
 [features]
 default = ["warn"]
 only_on_release = []
+only_on_debug = []
 warn = []
 
