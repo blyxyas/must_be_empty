@@ -1,7 +1,7 @@
 # Must be empty
 
 This attribute checks that a given function is empty. It is just that.
-This can be useful for debugging, when you're just using using `cargo test` and want to assure that nobody
+This can be useful for debugging, when you're just using using `cargo test` and want to assure that nobody in a repository puts content in the main function, for example.
 
 ## Example
 
